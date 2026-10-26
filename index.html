@@ -367,7 +367,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 <div class="page">
   <header class="site-head">
     <div class="head-in wrap gut">
-      <a class="logo" href="#about" data-tab="about" aria-label="Saad Skizzy, home">SK<span>.</span></a>
+      <a class="logo" href="#about" data-tab="about" aria-label="Saad Skizzy, home">SKIZZY<span>.</span></a>
       <nav class="tabs" role="tablist" aria-label="Sections">
         <button class="tab" role="tab" id="tab-about" aria-controls="panel-about" aria-selected="true" data-tab="about">about</button>
         <button class="tab" role="tab" id="tab-skills" aria-controls="panel-skills" aria-selected="false" tabindex="-1" data-tab="skills">skills</button>
@@ -492,7 +492,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
           <button class="btn" data-open="edits">View <svg class="i"><use href="#i-arrow"/></svg></button>
         </div>
         <div class="proj s" style="--i:3">
-          <div class="proj-main"><span class="tag mono">Discord</span><h3>Discord bot</h3><p>Chat with a demo bot and run its commands right here.</p></div>
+          <div class="proj-main"><span class="tag mono">Discord</span><h3>Discord bot</h3><p>Chat with a Skizzy Bot and run its commands right here.</p></div>
           <button class="btn" data-open="bot">Try <svg class="i"><use href="#i-arrow"/></svg></button>
         </div>
         <div class="proj s" style="--i:4">
@@ -859,7 +859,7 @@ function initBot(r){
     var m=el('div','m'),isBot=who==='bot';
     m.appendChild(el('div','av'+(isBot?' bot':''),isBot?'B':'Y'));
     var b=el('div','m-body'),n=el('div','m-name');
-    n.appendChild(el('span',null,isBot?'Demo Bot':'You'));if(isBot)n.appendChild(el('span','badge','BOT'));
+    n.appendChild(el('span',null,isBot?'Skizzy Bot':'You'));if(isBot)n.appendChild(el('span','badge','BOT'));
     b.appendChild(n);if(text)b.appendChild(el('div','m-text',text));
     if(embed)b.appendChild(embed);
     m.appendChild(b);msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;return m;
@@ -871,13 +871,15 @@ function initBot(r){
   }
   var BALL=['It is certain.','Without a doubt.','Ask again later.','Cannot predict now.','Do not count on it.','Very doubtful.','Signs point to yes.','Outlook good.'];
   var CMDS={
-    help:function(){return {text:'',embed:embed('Commands',[['/help','this list'],['/ping','check latency'],['/rank','your level and XP'],['/roll [sides]','roll a die'],['/8ball [question]','ask the ball'],['/coinflip','heads or tails'],['/serverinfo','server summary']])}},
+    help:function(){return {text:'',embed:embed('Commands',[['/help','this list'],['/ping','check latency'],['/rank','your level and XP'],['/roll [sides]','roll a die'],['/8ball [question]','ask the ball'],['/coinflip','heads or tails'],['/serverinfo','server summary'] , ['/whoisskizzy','Know More About Skizzy']])}},
     ping:function(){return {text:'Pong! API latency: '+(28+Math.floor(Math.random()*36))+' ms (demo value)'}},
     rank:function(){var bar=el('div','xp'),fill=el('i');bar.appendChild(fill);setTimeout(function(){fill.style.width='77%'},60);return {text:'',embed:embed('Your rank',[['Level','7'],['XP','1,240 / 1,600'],['Server rank','#4']],bar)}},
     roll:function(a){var n=parseInt(a,10);if(!(n>=2&&n<=1000))n=20;return {text:'You rolled '+(1+Math.floor(Math.random()*n))+' on a d'+n+'.'}},
     '8ball':function(a){return {text:(a?'"'+a+'" ':'')+BALL[Math.floor(Math.random()*BALL.length)]}},
     coinflip:function(){return {text:Math.random()<.5?'Heads.':'Tails.'}},
-    serverinfo:function(){return {text:'',embed:embed('Server info',[['Members','128'],['Channels','14'],['Roles','9'],['Bot uptime','12 days (demo)']])}}
+    serverinfo:function(){return {text:'',embed:embed('Server info',[['Members','128'],['Channels','14'],['Roles','9'],['Bot uptime','12 days (demo)']])}},
+    whoisskizzy:function(){return {text:'',embed:embed('Know More About Skizzy',[['Real Name','Saad'],['Age','19'],['Nationality','Moroccan'],['Experience','3 years'],['Discord','lions_one#0001'],['TikTok','@yourwishedskizzy'],['Instagram','@light_svvd'], ['WhatsApp','+212 619 753 421'],['Email','saad@example.com'], ['Skills','Web development, Discord bots, Video editing'],['Hobbies','Gaming, Music, Coding'],['Fun Fact','i love being under pressure and i love to be challenged'],['Motto','"If you want to be the best, you have to beat the best."'], ['Favorite Quote','"Im The Angel Who Was Born in Hell , Im The Hope of The Hopeless , Im The Light of The Darkest , Im The Fire That Burns in The Coldest , Im The King Who Was Born in The Streets , Im The Lion Who Was Born in The Jungle , Im The One Who Will Never Die."']])}}
+  
   };
   function send(raw){
     var s=raw.trim();if(!s||busy)return;
@@ -892,11 +894,11 @@ function initBot(r){
       add('bot',res.text,res.embed);
     },reduce?0:650);
   }
-  ['/help','/ping','/rank','/roll 6','/8ball will I win?','/coinflip','/serverinfo'].forEach(function(c){
+  ['/help','/ping','/rank','/roll 6','/8ball will I win?','/coinflip','/serverinfo' , '/whoisskizzy'].forEach(function(c){
     var b=el('button',null,c);b.type='button';b.addEventListener('click',function(){send(c)});chips.appendChild(b);
   });
   form.addEventListener('submit',function(e){e.preventDefault();var v=input.value;input.value='';send(v)});
-  add('bot','Hey, I am the demo bot. Type /help to see what I can do.');
+  add('bot','Hey, I am the Skizzy Bot. Type /help to see what I can do.');
 }
 
 /* phpMyAdmin sheet */
@@ -920,7 +922,7 @@ function buildDb(){
     logs.push({id:i,user_id:u,action:ACT[Math.min(a,4)],age:Math.floor(rnd()*90)});
     byUser[u]=(byUser[u]||0)+1;
   }
-  var CM=['rank','help','ping','roll','8ball','serverinfo','coinflip'],cmds=[];
+  var CM=['rank','help','ping','roll','8ball','serverinfo','coinflip' ,'whoisskizzy'],cmds=[];
   for(i=0;i<12000;i++){cmds.push({command:CM[Math.floor(Math.pow(rnd(),1.7)*CM.length)],day:Math.floor(rnd()*30)})}
   var ranked=Object.keys(byUser).map(Number).sort(function(p,q){return byUser[q]-byUser[p]});
   var probe=ranked[4];
