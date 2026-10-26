@@ -1,2 +1,0 @@
-# skizzy
-My Portfolio
